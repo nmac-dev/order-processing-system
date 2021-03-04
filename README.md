@@ -8,13 +8,13 @@ When a shipment is triggered for a customer, they are notified that a shipment i
 ## Task TODO List  
 ___
 ### Handling the Input File  
- - * [ ] read CL parameters (for the file name)
- - * [ ] process data for...  
-   - new customers  
-   - sales orders  
-   - end-of-day  
+ 1. * [ ] read CL parameters (for the file name)
+ 2. * [ ] process data for...  
+    - new customers  
+    - sales orders  
+    - end-of-day  
 ### Using the Input Data  
-Each record results in one of 4 following actions:
+Each record results in one of 4 following actions:  
 Add a new...  
  1. * [ ] customer (with unique id)  
  2. * [ ] "normal" order :  
@@ -31,11 +31,11 @@ Add a new...
 ### Handling Output
 
 
-## Deliverables
- - C++11
- - * [ ] Linux Shell compile script called "compileOP"
-   - compiled executable must be called "ordering"
- - * [ ] Report
+## Deliverables  
+( C++11 )  
+ 1. * [ ] Linux Shell compile script called "compileOP"
+    - compiled executable must be called "ordering"
+ 2. * [ ] Report
 
  ## Report
  - 3 pages (Max)
