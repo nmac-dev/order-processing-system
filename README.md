@@ -8,34 +8,34 @@ When a shipment is triggered for a customer, they are notified that a shipment i
 ## Task TODO List  
 ___
 ### Handling the Input File  
- - read CL parameters (for the file name)
- - process data for...  
+ - * [ ] read CL parameters (for the file name)
+ - * [ ] process data for...  
    - new customers  
    - sales orders  
    - end-of-day  
 ### Using the Input Data  
 Each record results in one of 4 following actions:
- - Add a new...  
-   1. customer (with unique id)  
-   2. "normal" order :  
-      - quantity is added to the customer's order total
-   3. express order :  
-      - quantity is added to the customer's order total, 
-      - then; total quantity is shipped to the customer,
-      - finally; the customer's order quantity is then reset to 0.  
- 4. End-of-day processing :  
-   - ( only for customers still have orders (> 0) )
-   - total quantity is shipped to the customer,
-   - then; the customer's order quantity is then reset to 0. 
+Add a new...  
+ 1. * [ ] customer (with unique id)  
+ 2. * [ ] "normal" order :  
+    - quantity is added to the customer's order total
+ 3. * [ ] express order :  
+    - quantity is added to the customer's order total, 
+    - then; total quantity is shipped to the customer,
+    - finally; the customer's order quantity is then reset to 0.  
+ 4. * [ ] End-of-day processing :  
+    - ( only for customers still have orders (> 0) )
+    - total quantity is shipped to the customer,
+    - then; the customer's order quantity is then reset to 0. 
 
 ### Handling Output
 
 
 ## Deliverables
  - C++11
- - Linux Shell compile script called "compileOP"
+ - * [ ] Linux Shell compile script called "compileOP"
    - compiled executable must be called "ordering"
- - Report
+ - * [ ] Report
 
  ## Report
  - 3 pages (Max)
