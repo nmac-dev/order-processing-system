@@ -6,7 +6,7 @@ If a customer placesan “express” order, then it and all its outstanding orde
 When a shipment is triggered for a customer, they are notified that a shipment is on its way, andan invoice is sent to them.  
 
 ## Task TODO List  
-___
+  
 ### Handling the Input File  
  1. * [ ] read CL parameters (for the file name)
  2. * [ ] process data for...  
