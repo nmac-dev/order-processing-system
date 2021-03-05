@@ -48,19 +48,39 @@ A message will be generated for each event...
  * [ ] end of a day has been reached
  * [ ] (customer message) customer receives an invoice
 
-### Output Regex for Records  
+### Input File Regex for Records
+Example
+| Line   | Contents                             | 
+| --:    | :--                                  |
+| 1      | C0001Royal Devon & Exeter Hospital   |
+| 2      | C0002Derriford Hospital              |
+| 3      | C0003Torbay Hospital                 |
+| 4      | S20210201N0001040                    |
+| 5      | S20210201N0001050                    |
+| 6      | E20210201                            |
+| 7      | S20210202N0001040                    |
+| 8      | S20210202N0001060                    |
+| 9      | S20210202N0002050                    |
+| 10     | S20210202N0002170                    |
+| 11     | E20210202                            |
+| 12     | S20210203N0001050                    |
+| 13     | S20210203N0002065                    |
+| 14     | S20210203N0003150                    |
+| 15     | S20210203X0001190                    |
+| 16     | S20210203N0002110                    |
+| 17     | E20210203                            |
   
 #### New Customer
 | Column | Datatype  | Description                                   |
 | --:    | :-:       | :--                                           |
-| 1      | char      | C                                             |
+| 1      | char      | start with 'C'                                |
 | 2-5    | int       | customer number; a four digit, zero-padded    |
 | 6-45   | string    | customer’s name                               |
 
 #### Sales Order
 | Column | Datatype  | Description                                   |
 | --:    | :-:       | :--                                           |
-| 1      | char      | 'S'                                           |
+| 1      | char      | start with 'S'                                |
 | 2-9    | int       | order date (YYYYMMDD)                         |
 | 10     | char      | 'N' = normal order; 'X' = express order       |
 | 11-14  | int       | customer number (customer raising the order)  |
@@ -69,7 +89,7 @@ A message will be generated for each event...
 #### End-of-day
 | Column | Datatype  | Description                                   |
 | --:    | :-:       | :--                                           |
-| 1      | char      | 'E'                                           |
+| 1      | char      | start with 'E'                                |
 | 2-9    | int       | date (YYYYMMDD); marks the end of the day     |
 
 ___
