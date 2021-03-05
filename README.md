@@ -3,8 +3,8 @@ Coursework (2/2) for module ECM2433
 ## Scenario  
 Customer's place multiple orders during each day.  
 At the end of each day the orders are collated and each customer’s total order quantity is sent to them as a single shipment.  
-If a customer placesan “express” order, then it and all its outstanding orders for the day are sent immediately (i.e.  notwaiting for the end of the day).  
-When a shipment is triggered for a customer, they are notified that a shipment is on its way, andan invoice is sent to them.  
+If a customer places an “express” order, then it and all its outstanding orders for the day are sent immediately (bypasses end of day).  
+When a shipment is triggered for a customer, they are notified that a shipment is on its way, and an invoice is sent to them.  
 
 ## Task TODO List
 Each checkbox represents...
