@@ -49,7 +49,7 @@ ___
 ## Deliverables  
 ( C++11 )  
  * [ ] Linux Shell compile script called "compileOP"
-   - compiled executable must be called "ordering"
+ * [ ] compiled executable must be called "ordering"
  * [ ] Report
 
  ## Report
