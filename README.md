@@ -13,8 +13,8 @@ When a shipment is triggered for a customer, they are notified that a shipment i
     - new customers  
     - sales orders  
     - end-of-day  
-  
-### Using the Input Data  
+### Using the Input Data
+Sales order records can be normal or express orders.  
 Each record results in one of 4 following actions:  
 Add a new...  
  1. * [ ] customer (with unique id)  
@@ -28,8 +28,9 @@ Add a new...
     - ( only for customers still have orders (> 0) )
     - total quantity is shipped to the customer,
     - then; the customer's order quantity is then reset to 0. 
-  
-### Handling Output
+
+### Handling Output  
+Messages sent to the output stream  
 
 
 ## Deliverables  
@@ -38,11 +39,11 @@ Add a new...
     - compiled executable must be called "ordering"
  2. * [ ] Report
 
- ### Report
+ ## Report
  - 3 pages (Max)
  - Must describe:
    - overall design
-   - how classes support the functionality
+   - how classes support the fnctionality
    - assumptions made
    - (only if code does not work)
      - the testing performed to find the problem
