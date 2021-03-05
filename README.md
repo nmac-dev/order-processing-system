@@ -48,9 +48,7 @@ A message will be generated for each event...
  * [ ] end of a day has been reached
  * [ ] (customer message) customer receives an invoice
 
-### Output Regex for Records
-| Column | Datatype | Description |
-|--:     |:-:       |:--          |
+### Output Regex for Records  
   
 #### New Customer
 | Column | Datatype  | Description                                   |
