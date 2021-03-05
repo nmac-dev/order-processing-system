@@ -8,7 +8,7 @@ ___
 ## Task TODO List  
 Each checkbox represents...  
  * [ ] Code to be implemented  
- * :white_check_mark: Implementation complete  
+ * [x] Implementation complete  
   
 ### Handling the Input File  
  1. * [ ] read CL parameters (for the file name)
