@@ -48,10 +48,32 @@ A message will be generated for each event...
  * [ ] end of a day has been reached
  * [ ] (customer message) customer receives an invoice
 
-### Record Regex
-Column | Datatype | Description
-#### New Customer Record
- 
+### Output Regex for Records
+| Column | Datatype | Description |
+|--:     |:-:       |:--          |
+  
+#### New Customer
+| Column | Datatype  | Description                                   |
+| --:    | :-:       | :--                                           |
+| 1      | char      | C                                             |
+| 2-5    | int       | customer number; a four digit, zero-padded    |
+| 6-45   | string    | customer’s name                               |
+
+#### Sales Order
+| Column | Datatype  | Description                                   |
+| --:    | :-:       | :--                                           |
+| 1      | char      | 'S'                                           |
+| 2-9    | int       | order date (YYYYMMDD)                         |
+| 10     | char      | 'N' = normal order; 'X' = express order       |
+| 11-14  | int       | customer number (customer raising the order)  |
+| 15-17  | int       | order quantity; three-digits, zero-padded     |
+
+#### End-of-day
+| Column | Datatype  | Description                                   |
+| --:    | :-:       | :--                                           |
+| 1      | char      | 'E'                                           |
+| 2-9    | int       | date (YYYYMMDD); marks the end of the day     |
+
 ___
 ## Deliverables
 ( C++11 )
