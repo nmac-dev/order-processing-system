@@ -48,8 +48,8 @@ A message will be generated for each event...
  * [ ] end of a day has been reached
  * [ ] (customer message) customer receives an invoice
 
-### Input File Regex for Records
-Example
+### Input File Regex (Records)
+Example Input File
 | Line   | Contents                             | 
 | --:    | :--                                  |
 | 1      | C0001Royal Devon & Exeter Hospital   |
