@@ -12,7 +12,7 @@ Each checkbox represents...
  * [x] Implementation complete
 ___
 ### Handling the Input File
- * [ ] read CL parameters (for the file name)
+ * [x] read CL parameters (for the file name)
  * [ ] process data for...
    - new customers
    - sales orders
