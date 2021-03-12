@@ -7,7 +7,7 @@ int main(int argc, char** argv) {
 
     /* validate CL arguments size */
     if (argc != 2) {
-        cout << "Error: command line expects [Input File] directory argument..." << endl;
+        cerr << "Error: command line expects [Input File] directory argument..." << endl;
         exit(EXIT_FAILURE);
     }
 
