@@ -95,8 +95,8 @@ Example Input File
 ___
 ## Deliverables
 ( C++11 )
- * [ ] Linux Shell compile script called "compileOP"
- * [ ] compiled executable must be called "ordering"
+ * [x] Linux Shell compile script called "compileOP"
+ * [x] compiled executable must be called "ordering"
  * [ ] Report
 
  ## Report
