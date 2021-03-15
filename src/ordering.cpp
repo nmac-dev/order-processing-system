@@ -1,8 +1,12 @@
 #include <string>
+#include <vector>
 #include <iostream>
 #include <fstream>
 
 using namespace std;
+
+/* Prototypes */
+
 
 int main(int argc, char **argv) {
 
@@ -11,10 +15,12 @@ int main(int argc, char **argv) {
         cerr << "Error: command line expects [Input File] directory argument..." << endl;
         exit(EXIT_FAILURE);
     }
+    const char *fileIn = argv[1];
 
-    char *fileIn = argv[1];
 
-    /* Load input file */
+    /* Load Input File Contents */
+    vector<string> inputData;
+    
     ifstream inputFile;
     try {
 
@@ -23,7 +29,8 @@ int main(int argc, char **argv) {
 
             string line;
             while( getline(inputFile, line) ) {
-                cout << line << endl;
+                inputData.push_back(line);
+                cout << line << endl;       // Debug
             } 
 
         } else throw( fileIn );
@@ -37,3 +44,38 @@ int main(int argc, char **argv) {
     /* Program Complete */
     exit(EXIT_SUCCESS);
 }
+
+
+
+/* Process Input File Data */
+
+
+
+/* Customer Class */
+class Customer {
+    
+    // csmr == customer
+    private:
+
+        int csmrID;
+        string csmrName;
+        int csmrCurrentOrders;
+
+        /* Setter */
+        void setCsmrID(int id)          { csmrID = id;      }
+        void setCsmrName(string name)   { csmrName = name;  }
+
+    public:
+
+        /* Getters */
+        int getCsmrID()         { return csmrID;    }
+        string getCsmrName()    { return csmrName;  }
+        
+
+    Customer(int id, string name) {
+        setCsmrID(id);
+        setCsmrName(name);
+    }
+        
+};
+
