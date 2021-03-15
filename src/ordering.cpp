@@ -1,11 +1,14 @@
 #include <string>
 #include <vector>
+#include <cctype>
 #include <iostream>
 #include <fstream>
 
 using namespace std;
 
 /* Prototypes */
+vector<string>  &loadInputFileData(         const char *        );
+void            runOrderProcessingSystem(   vector<string> &    );
 
 
 int main(int argc, char **argv) {
@@ -19,8 +22,19 @@ int main(int argc, char **argv) {
 
 
     /* Load Input File Contents */
-    vector<string> inputData;
+    vector<string> &inputData = loadInputFileData(fileIn);
+
+    /* Run Order Processing System */
+    runOrderProcessingSystem(inputData);
+
+    /* Program Complete */
+    exit(EXIT_SUCCESS);
+}
+
+/* Process Input File Data */
+vector<string> &loadInputFileData(const char *fileIn) {
     
+    static vector<string> inputData;
     ifstream inputFile;
     try {
 
@@ -30,7 +44,6 @@ int main(int argc, char **argv) {
             string line;
             while( getline(inputFile, line) ) {
                 inputData.push_back(line);
-                cout << line << endl;       // Debug
             } 
 
         } else throw( fileIn );
@@ -40,14 +53,53 @@ int main(int argc, char **argv) {
         cerr << "Error: could not open/read input file... " << e << endl;
         exit(EXIT_FAILURE);
     }
-
-    /* Program Complete */
-    exit(EXIT_SUCCESS);
+    return inputData;
 }
 
+void runOrderProcessingSystem(vector<string> &inputData) {
 
+    for (int i = 0; i < inputData.size(); i++) {
+        
+        char firstChar = inputData[i][0];
+        switch (firstChar) {
+            
+            /* Customer */
+            case 'C':
+                // ...
+                break;
 
-/* Process Input File Data */
+            /* Order */
+            case 'S':
+                // ...
+                break;
+
+            /* End-Of-Day */
+            case 'E':
+                // ...
+                break;
+
+            /* Error: file format for*/
+            default:
+                // False positive Error (skip)
+                if( isspace(firstChar) || firstChar == 0) {
+
+                    continue;
+                }
+                // True Error
+                else {
+
+                    cerr    << "Error: input file contains invalid format, the first character must be 'C' 'S' or 'E' but... " 
+                            << firstChar 
+                            << " ...on line... "
+                            << ++i
+                            << " was found!"
+                            << endl;
+                    exit(EXIT_FAILURE);
+                }
+        }
+        cout << firstChar << endl; // DEBUG
+    }
+}
 
 
 
