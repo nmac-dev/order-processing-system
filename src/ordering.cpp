@@ -58,6 +58,7 @@ vector<string> &loadInputFileData(const char *fileIn) {
 
 void runOrderProcessingSystem(vector<string> &inputData) {
 
+    /* Iterate through vector index for each data entry */
     for (int i = 0; i < inputData.size(); i++) {
         
         char firstChar = inputData[i][0];
@@ -88,11 +89,11 @@ void runOrderProcessingSystem(vector<string> &inputData) {
                 // True Error
                 else {
 
-                    cerr    << "Error: input file contains invalid format, the first character must be 'C' 'S' or 'E' but... " 
+                    cerr    << "Error: Input file contains invalid format, the first character must be 'C' 'S' or 'E' but.. " 
                             << firstChar 
-                            << " ...on line... "
+                            << " ..on line.. "
                             << ++i
-                            << " was found!"
+                            << " ..was found!"
                             << endl;
                     exit(EXIT_FAILURE);
                 }
