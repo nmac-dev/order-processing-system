@@ -66,17 +66,24 @@ void runOrderProcessingSystem(vector<string> &inputData) {
             
             /* Customer */
             case 'C':
-                // ...
+                /* Messages TODO~
+                    new customer added, with customer number 1 and current order quantity 0
+                 */
                 break;
 
             /* Order */
             case 'S':
-                // ...
+                /* Messages TODO~
+                    customer X:  order quantity is incremented by Y
+                 */
                 break;
 
             /* End-Of-Day */
             case 'E':
-                // ...
+                /* Messages TODO~
+                    end of day 20200201:
+                        quantity of X shipped to customer Y; customer Y order quantity reset to 0
+                 */
                 break;
 
             /* Error: file format for*/
