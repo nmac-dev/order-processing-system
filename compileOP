@@ -2,7 +2,8 @@
 ## compile ##
 clear                                                                   \
  && [[ -d bin ]] || mkdir bin                                           \
+ && g++ -std=c++11 -I./src -c ./src/customer.cpp    -o ./bin/customer.o \
  && g++ -std=c++11 -I./src -c ./src/ordering.cpp    -o ./bin/ordering.o \
- && g++ bin/ordering.o                              -o bin/ordering     \
- && rm  bin/ordering.o                                                  \
+ && g++ bin/customer.o bin/ordering.o                -o bin/ordering    \
+ && rm  bin/ordering.o bin/customer.o                                   \
  && echo "Success" || echo "Error: Compiler Failed..."

@@ -10,12 +10,11 @@ using namespace std;
 vector<string>  &loadInputFileData(         const char *        );
 void            runOrderProcessingSystem(   vector<string> &    );
 
-
 int main(int argc, char **argv) {
 
     /* validate CL arguments size */
     if (argc != 2) {
-        cerr << "Error: command line expects [Input File] directory argument..." << endl;
+        cerr << "Error: command line expects a single [ InputFile.txt ] directory argument..." << endl;
         exit(EXIT_FAILURE);
     }
     const char *fileIn = argv[1];
@@ -58,7 +57,7 @@ vector<string> &loadInputFileData(const char *fileIn) {
 
 void runOrderProcessingSystem(vector<string> &inputData) {
 
-    /* Iterate through vector index for each data entry */
+    /* Iterate through each data entry stored in the vector */
     for (int i = 0; i < inputData.size(); i++) {
         
         char firstChar = inputData[i][0];
@@ -108,34 +107,3 @@ void runOrderProcessingSystem(vector<string> &inputData) {
         cout << firstChar << endl; // DEBUG
     }
 }
-
-
-
-/* Customer Class */
-class Customer {
-    
-    // csmr == customer
-    private:
-
-        int csmrID;
-        string csmrName;
-        int csmrCurrentOrders;
-
-        /* Setter */
-        void setCsmrID(int id)          { csmrID = id;      }
-        void setCsmrName(string name)   { csmrName = name;  }
-
-    public:
-
-        /* Getters */
-        int getCsmrID()         { return csmrID;    }
-        string getCsmrName()    { return csmrName;  }
-        
-
-    Customer(int id, string name) {
-        setCsmrID(id);
-        setCsmrName(name);
-    }
-        
-};
-
