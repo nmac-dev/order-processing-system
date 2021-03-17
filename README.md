@@ -22,7 +22,7 @@ ___
 Sales order records can be normal or express orders.  
 Each record results in one of 4 following actions:  
 Add a new...
- * [ ] customer (with unique id)
+ * [x] customer (with unique id)
  * [ ] "normal" order :
    - quantity is added to the customer's order total
  * [ ] express order :
