@@ -9,8 +9,9 @@
 using namespace std;
 
 /* Prototypes */
-vector<string>  &loadInputFileData(         const char *        );
-void            runOrderProcessingSystem(   vector<string> &    );
+vector<string>  &loadInputFileData(const char *);
+void            runOrderProcessingSystem(vector<string> &);
+Customer        processCustomer(string, vector<Customer> &);
 
 int main(int argc, char **argv) {
 
@@ -69,6 +70,7 @@ void runOrderProcessingSystem(vector<string> &inputData) {
             
             /* Customer */
             case 'C':
+                customers.push_back( processCustomer(inputData[i], customers) );
                 /* Messages TODO~
                     new customer added, with customer number 1 and current order quantity 0
                  */
@@ -110,4 +112,28 @@ void runOrderProcessingSystem(vector<string> &inputData) {
         }
         cout << firstChar << endl; // DEBUG
     }
+}
+
+/* Processes and validates a new customer to be added from the input data */
+Customer processCustomer(string inputLine, vector<Customer> &currentCustomers) {
+
+    int number  = stoi( inputLine.substr(1, 4) );
+    string name = inputLine.substr(5, 44);
+
+    // Validate cuastomer is not duplicate
+    for( int j = 0; j < currentCustomers.size(); j++ ) {
+
+        if ( number == currentCustomers[j].getCsmrID() ) {
+
+            cerr << "Error: Duplicate customer found within input file... "
+                 << "\nID: \t"
+                 << inputLine.substr(1, 4)
+                 << "\nName: \t"
+                 << inputLine.substr(5, 44)
+                 << endl;
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    return Customer(number, name);
 }
