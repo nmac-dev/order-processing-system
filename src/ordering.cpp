@@ -1,14 +1,12 @@
-#ifndef __ORDERING_CPP
 
-#include <string>
-#include <vector>
+
 #include <cctype>
 #include <iostream>
 #include <fstream>
 
-using namespace std;
+#include "customer.cpp"
 
-#endif
+using namespace std;
 
 /* Prototypes */
 vector<string>  &loadInputFileData(         const char *        );

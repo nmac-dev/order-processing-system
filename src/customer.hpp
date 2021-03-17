@@ -6,8 +6,6 @@
 
 #include "order.hpp"
 
-#endif
-
 /* Customer (csmr) Prototype */
 class Customer {
     
@@ -27,9 +25,11 @@ class Customer {
         /* Getters */
         int     getCsmrID(),
                 getTotalOrders();
-        std::string  getCsmrName();
+        std::string getCsmrName();
 
         /* Methods */
         void    addOrder(Order, int),
                 resetTotalOrders();
 };
+
+#endif

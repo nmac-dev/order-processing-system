@@ -1,8 +1,6 @@
 #ifndef __ORDER_HPP
 #define __ORDER_HPP
 
-#endif
-
 /* Customer (csmr) Prototype */
 class Order {
     
@@ -23,3 +21,5 @@ class Order {
                 getCustomerNumber(),
                 getOrderQuantity();
 };
+
+#endif
