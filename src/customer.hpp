@@ -11,7 +11,7 @@ class Customer {
     
     private:
 
-        std::vector<Order> orders;
+        std::vector<Order *> orders;
         int     csmrID,
                 totalOrders;
         std::string  csmrName;
@@ -29,7 +29,7 @@ class Customer {
                     toStringCsmrID();
 
         /* Methods */
-        void    addOrder(Order),
+        void    addOrder(Order *),
                 resetTotalOrders();
 };
 

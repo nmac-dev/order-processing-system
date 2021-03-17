@@ -11,8 +11,8 @@ using namespace std;
 /* Prototypes */
 vector<string>  &loadInputFileData(const char *);
 void        runOrderProcessingSystem(vector<string> &);
-Customer    processCustomer(string, vector<Customer> &);
-void        processOrder(string, vector<Customer> &);
+Customer   *processCustomer(string, vector<Customer *> &);
+void        processOrder(   string, vector<Customer *> &);
 
 int main(int argc, char **argv) {
 
@@ -61,7 +61,7 @@ vector<string> &loadInputFileData(const char *fileIn) {
 
 void runOrderProcessingSystem(vector<string> &inputData) {
 
-    vector<Customer> customers;
+    static vector<Customer *> customers;
 
     /* Iterate through each data entry stored in the vector */
     for (int i = 0; i < inputData.size(); i++) {
@@ -71,15 +71,14 @@ void runOrderProcessingSystem(vector<string> &inputData) {
             
             /* Customer */
             case 'C':
-                processCustomer( inputData[i], customers );
-                /* Messages TODO~
-                    new customer added, with customer number X and current order quantity 0
-                 */
+
+                customers.push_back( processCustomer(inputData[i], customers) );
                 break;
 
             /* Order */
             case 'S':
-            processOrder( inputData[i], customers );
+            
+                processOrder( inputData[i], customers );
                 /* Messages TODO~
                     customer X:  order quantity is incremented by Y
                  */
@@ -93,7 +92,7 @@ void runOrderProcessingSystem(vector<string> &inputData) {
                  */
                 break;
 
-            /* Error: file format for*/
+            /* Error: file format incorrect */
             default:
                 // False positive Error (skip)
                 if( isspace(firstChar) || firstChar == 0) {
@@ -117,23 +116,23 @@ void runOrderProcessingSystem(vector<string> &inputData) {
 }
 
 /* Processes and validates a new customer to be added from the input data */
-Customer processCustomer(string inputLine, vector<Customer> &currentCustomers) {
+Customer *processCustomer(string inputLine, vector<Customer *> &currentCustomers) {
 
     int number  = stoi( inputLine.substr(1, 4) );
-    string name = inputLine.substr(5, 44);
+    string name = inputLine.substr(5, 39);
 
-    Customer newCustomer = Customer(number, name);
+    Customer *newCustomer = new Customer(number, name);
 
     // Validate customer is not duplicate
     for( int j = 0; j < currentCustomers.size(); j++ ) {
 
-        if ( number == currentCustomers[j].getCsmrID() ) {
+        if ( number == currentCustomers[j]->getCsmrID() ) {
 
             cerr << "Error: Duplicate customer found within input file... "
                  << "\nID: \t"
-                 << newCustomer.toStringCsmrID()
+                 << newCustomer->toStringCsmrID()
                  << "\nName: \t"
-                 << newCustomer.getCsmrName()
+                 << newCustomer->getCsmrName()
                  << endl;
             exit(EXIT_FAILURE);
         }
@@ -141,7 +140,7 @@ Customer processCustomer(string inputLine, vector<Customer> &currentCustomers) {
 
     // Send Message to output stream
     cout << "OP: customer "
-         << newCustomer.toStringCsmrID()
+         << newCustomer->toStringCsmrID()
          << " added"
          << endl;
 
@@ -149,7 +148,7 @@ Customer processCustomer(string inputLine, vector<Customer> &currentCustomers) {
 }
 
 /* Processes and validates a new order to be added from the input data */
-void processOrder(string inputLine, vector<Customer> &currentCustomers) {
+void processOrder(string inputLine, vector<Customer *> &currentCustomers) {
 
     // TODO: CUSTOMER IS NULL
 
@@ -158,26 +157,16 @@ void processOrder(string inputLine, vector<Customer> &currentCustomers) {
     int  csmrNum    = stoi( inputLine.substr(10, 4) );
     int  quantity   = stoi( inputLine.substr(14, 3) );
 
-    cout     << "\n |Date: " 
-             << odrDate
-             << "\n |Order Type: "
-             << orderType
-             << "\n |Customer Number: "
-             << csmrNum
-             << "\n |Quantity: "
-             << quantity
-             << endl;
-
-    Order newOrder = Order(0, 0, 0);
+    Order *newOrder = NULL;
 
     // Validate order type
     if ( orderType == 'N') {
 
-        newOrder = Order(odrDate, csmrNum, quantity);
+        newOrder = new Order(odrDate, csmrNum, quantity);
     }
     else if ( orderType == 'X') {
 
-        newOrder = Order(odrDate, csmrNum, quantity);
+        newOrder = new Order(odrDate, csmrNum, quantity);
         cout << "Create EXPR ORder" <<endl;
     }
     else {
@@ -199,24 +188,22 @@ void processOrder(string inputLine, vector<Customer> &currentCustomers) {
     int i = 0;
     do {
 
-        cout << "OdrNum: " << newOrder.getCustomerNumber()
-             << "CsmrID: " << currentCustomers[i].getCsmrID()
-             << endl;
-        if ( newOrder.getCustomerNumber() == currentCustomers[i].getCsmrID()) {
+        if ( newOrder->getCustomerNumber() == currentCustomers[i]->getCsmrID()) {
 
-            currentCustomers[i].addOrder( newOrder );
+            currentCustomers[i]->addOrder( newOrder );
             break;
         }
         i++;
-    } 
+    }
     while (i < currentCustomers.size());
     
     // OP: customer 0001:  normal order:  quantity 40
         // << currentCustomers[i].toStringCsmrID()
     cout << "OP: customer "
          << ": "
-         << newOrder.toStringOrderType()
+         << newOrder->toStringOrderType()
          << " order: "
-         << "quantity 40"
+         << "quantity "
+         << newOrder->getOrderQuantity()
          << endl;
 }
