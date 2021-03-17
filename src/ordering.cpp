@@ -1,3 +1,5 @@
+#ifndef __ORDERING_CPP
+
 #include <string>
 #include <vector>
 #include <cctype>
@@ -5,6 +7,8 @@
 #include <fstream>
 
 using namespace std;
+
+#endif
 
 /* Prototypes */
 vector<string>  &loadInputFileData(         const char *        );
@@ -56,6 +60,8 @@ vector<string> &loadInputFileData(const char *fileIn) {
 }
 
 void runOrderProcessingSystem(vector<string> &inputData) {
+
+    vector<Customer> customers;
 
     /* Iterate through each data entry stored in the vector */
     for (int i = 0; i < inputData.size(); i++) {

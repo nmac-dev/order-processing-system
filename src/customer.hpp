@@ -2,32 +2,34 @@
 #define __CUSTOMER_HPP
 
 #include <string>
+#include <vector>
 
-using namespace std;
+#include "order.hpp"
 
 #endif
 
 /* Customer (csmr) Prototype */
 class Customer {
     
-    protected:
+    private:
 
+        std::vector<Order> orders;
         int     csmrID,
                 totalOrders;
-        string  csmrName;
+        std::string  csmrName;
 
     public:
 
         /* Constructor & Destructor */
-        Customer(int, string);
+        Customer(int, std::string);
         ~Customer();   
 
         /* Getters */
         int     getCsmrID(),
                 getTotalOrders();
-        string  getCsmrName();
+        std::string  getCsmrName();
 
         /* Methods */
-        void    addOrderQuantity(int),
+        void    addOrder(Order, int),
                 resetTotalOrders();
 };
