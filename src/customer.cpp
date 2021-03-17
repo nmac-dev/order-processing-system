@@ -22,3 +22,16 @@ inline void Customer::addOrder(Order odr, int quantity) {
 }
 
 inline void Customer::resetTotalOrders() { this->totalOrders = 0; }
+
+inline std::string Customer::toStringCsmrID() {
+
+        std::string strCsmrID   = std::to_string(this->csmrID);
+	std::string paddedID    = ""; 
+	
+	while(paddedID.length() != 4 - strCsmrID.length()) {
+
+                paddedID += "0";
+        }
+
+        return paddedID + strCsmrID;
+}

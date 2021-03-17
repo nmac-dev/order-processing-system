@@ -1,6 +1,8 @@
 #ifndef __ORDER_HPP
 #define __ORDER_HPP
 
+#include <string>
+
 /* Customer (csmr) Prototype */
 class Order {
     
@@ -20,6 +22,8 @@ class Order {
         int     getOrderDate(),
                 getCustomerNumber(),
                 getOrderQuantity();
+        std::string strOrderType(),
+                    strOrderDetails(int);
 };
 
 #endif

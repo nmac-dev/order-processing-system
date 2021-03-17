@@ -10,6 +10,19 @@ Order::Order(int odrDate, int csmrNum, int quantity) {
 Order::~Order(){}
 
 /* Getters */
-inline int Order::getOrderDate()       { return this->orderDate;       }
-inline int Order::getCustomerNumber()  { return this->customerNumber;  }
-inline int Order::getOrderQuantity()   { return this->orderQuantity;   }
+inline int  Order::getOrderDate()       { return this->orderDate;       }
+inline int  Order::getCustomerNumber()  { return this->customerNumber;  }
+inline int  Order::getOrderQuantity()   { return this->orderQuantity;   }
+inline std::string Order::strOrderType() { return "normal";             }
+
+/* returns the order details as a string */
+inline std::string Order::strOrderDetails(int csmrNum) {  
+    
+    // customer 0001:  normal order:  quantity 40
+    std::string orderDetails =   "customer " + std::to_string( csmrNum ); + ": "
+                                + this->strOrderType() + " order: "
+                                + "quantity: " + std::to_string( this->orderQuantity );
+
+    return orderDetails;
+
+}

@@ -1,8 +1,8 @@
 #ifndef __CUSTOMER_HPP
 #define __CUSTOMER_HPP
 
-#include <string>
 #include <vector>
+#include <iostream>
 
 #include "order.hpp"
 
@@ -25,7 +25,8 @@ class Customer {
         /* Getters */
         int     getCsmrID(),
                 getTotalOrders();
-        std::string getCsmrName();
+        std::string getCsmrName(),
+                    toStringCsmrID();
 
         /* Methods */
         void    addOrder(Order, int),

@@ -1,7 +1,6 @@
 
 
 #include <cctype>
-#include <iostream>
 #include <fstream>
 
 #include "customer.cpp"
@@ -72,7 +71,7 @@ void runOrderProcessingSystem(vector<string> &inputData) {
             case 'C':
                 customers.push_back( processCustomer(inputData[i], customers) );
                 /* Messages TODO~
-                    new customer added, with customer number 1 and current order quantity 0
+                    new customer added, with customer number X and current order quantity 0
                  */
                 break;
 
@@ -120,6 +119,8 @@ Customer processCustomer(string inputLine, vector<Customer> &currentCustomers) {
     int number  = stoi( inputLine.substr(1, 4) );
     string name = inputLine.substr(5, 44);
 
+    Customer newCustomer = Customer(number, name);
+
     // Validate cuastomer is not duplicate
     for( int j = 0; j < currentCustomers.size(); j++ ) {
 
@@ -135,5 +136,10 @@ Customer processCustomer(string inputLine, vector<Customer> &currentCustomers) {
         }
     }
 
-    return Customer(number, name);
+    cout << "OP: customer "
+         << newCustomer.toStringCsmrID()
+         << " added"
+         << endl;
+
+    return newCustomer;
 }
