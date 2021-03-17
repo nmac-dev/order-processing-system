@@ -3,14 +3,16 @@
 #include <cctype>
 #include <fstream>
 
+#include "order.cpp"
 #include "customer.cpp"
 
 using namespace std;
 
 /* Prototypes */
 vector<string>  &loadInputFileData(const char *);
-void            runOrderProcessingSystem(vector<string> &);
-Customer        processCustomer(string, vector<Customer> &);
+void        runOrderProcessingSystem(vector<string> &);
+Customer    processCustomer(string, vector<Customer> &);
+void        processOrder(string, vector<Customer> &);
 
 int main(int argc, char **argv) {
 
@@ -69,7 +71,7 @@ void runOrderProcessingSystem(vector<string> &inputData) {
             
             /* Customer */
             case 'C':
-                customers.push_back( processCustomer(inputData[i], customers) );
+                processCustomer( inputData[i], customers );
                 /* Messages TODO~
                     new customer added, with customer number X and current order quantity 0
                  */
@@ -77,6 +79,7 @@ void runOrderProcessingSystem(vector<string> &inputData) {
 
             /* Order */
             case 'S':
+            processOrder( inputData[i], customers );
                 /* Messages TODO~
                     customer X:  order quantity is incremented by Y
                  */
@@ -121,25 +124,99 @@ Customer processCustomer(string inputLine, vector<Customer> &currentCustomers) {
 
     Customer newCustomer = Customer(number, name);
 
-    // Validate cuastomer is not duplicate
+    // Validate customer is not duplicate
     for( int j = 0; j < currentCustomers.size(); j++ ) {
 
         if ( number == currentCustomers[j].getCsmrID() ) {
 
             cerr << "Error: Duplicate customer found within input file... "
                  << "\nID: \t"
-                 << inputLine.substr(1, 4)
+                 << newCustomer.toStringCsmrID()
                  << "\nName: \t"
-                 << inputLine.substr(5, 44)
+                 << newCustomer.getCsmrName()
                  << endl;
             exit(EXIT_FAILURE);
         }
     }
 
+    // Send Message to output stream
     cout << "OP: customer "
          << newCustomer.toStringCsmrID()
          << " added"
          << endl;
 
     return newCustomer;
+}
+
+/* Processes and validates a new order to be added from the input data */
+void processOrder(string inputLine, vector<Customer> &currentCustomers) {
+
+    // TODO: CUSTOMER IS NULL
+
+    int  odrDate    = stoi( inputLine.substr(1, 8) );
+    char orderType  = inputLine[9];
+    int  csmrNum    = stoi( inputLine.substr(10, 4) );
+    int  quantity   = stoi( inputLine.substr(14, 3) );
+
+    cout     << "\n |Date: " 
+             << odrDate
+             << "\n |Order Type: "
+             << orderType
+             << "\n |Customer Number: "
+             << csmrNum
+             << "\n |Quantity: "
+             << quantity
+             << endl;
+
+    Order newOrder = Order(0, 0, 0);
+
+    // Validate order type
+    if ( orderType == 'N') {
+
+        newOrder = Order(odrDate, csmrNum, quantity);
+    }
+    else if ( orderType == 'X') {
+
+        newOrder = Order(odrDate, csmrNum, quantity);
+        cout << "Create EXPR ORder" <<endl;
+    }
+    else {
+
+        cerr << "Error: order either; has no type defined ('N'/'X') or follows an incorrect format"
+             << "\n |Date: " 
+             << odrDate
+             << "\n |Order Type: "
+             << orderType
+             << "\n |Customer Number: "
+             << csmrNum
+             << "\n |Quantity: "
+             << quantity
+             << endl;
+        exit(EXIT_FAILURE);
+    }
+
+    // Add order to customer orders
+    int i = 0;
+    do {
+
+        cout << "OdrNum: " << newOrder.getCustomerNumber()
+             << "CsmrID: " << currentCustomers[i].getCsmrID()
+             << endl;
+        if ( newOrder.getCustomerNumber() == currentCustomers[i].getCsmrID()) {
+
+            currentCustomers[i].addOrder( newOrder );
+            break;
+        }
+        i++;
+    } 
+    while (i < currentCustomers.size());
+    
+    // OP: customer 0001:  normal order:  quantity 40
+        // << currentCustomers[i].toStringCsmrID()
+    cout << "OP: customer "
+         << ": "
+         << newOrder.toStringOrderType()
+         << " order: "
+         << "quantity 40"
+         << endl;
 }

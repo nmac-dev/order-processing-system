@@ -22,8 +22,8 @@ class Order {
         int     getOrderDate(),
                 getCustomerNumber(),
                 getOrderQuantity();
-        std::string strOrderType(),
-                    strOrderDetails(int);
+        std::string toStringOrderType(),
+                    toStringOrderDetails(int);
 };
 
 #endif

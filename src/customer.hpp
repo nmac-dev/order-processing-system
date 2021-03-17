@@ -29,7 +29,7 @@ class Customer {
                     toStringCsmrID();
 
         /* Methods */
-        void    addOrder(Order, int),
+        void    addOrder(Order),
                 resetTotalOrders();
 };
 
