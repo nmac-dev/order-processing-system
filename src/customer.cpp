@@ -25,15 +25,9 @@ inline void Customer::addOrder(Order *odr) {
 
 inline void Customer::resetTotalOrders() { this->totalOrders = 0; }
 
-inline std::string Customer::toStringCsmrID() {
+/* Returns the padded customer id */
+inline std::ostream &operator <<(std::ostream &stream, Customer &csmr) {
 
-        std::string strCsmrID   = std::to_string(this->csmrID);
-	std::string paddedID    = ""; 
-	
-	while(paddedID.length() != 4 - strCsmrID.length()) {
-
-                paddedID += "0";
-        }
-
-        return paddedID + strCsmrID;
+        stream << std::setfill('0') << std::setw(4) << csmr.getCsmrID();
+        return stream;
 }

@@ -8,22 +8,24 @@ class Order {
     
     protected:
 
-        int     orderDate,
-                customerNumber,
-                orderQuantity;
+        int  orderDate,
+             customerNumber,
+             orderQuantity;
+        char orderType;
 
     public:
 
         /* Constructor & Destructor */
-        Order(int, int, int);
+        Order(int, int, int, char);
         ~Order();   
 
         /* Getters */
         int     getOrderDate(),
                 getCustomerNumber(),
                 getOrderQuantity();
-        std::string toStringOrderType(),
+        std::string getOrderType(),
                     toStringOrderDetails(int);
+        friend std::ostream &operator <<(std::ostream &, Order &);
 };
 
 #endif

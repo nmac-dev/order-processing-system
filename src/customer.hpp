@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <iostream>
+#include <iomanip>
 
 #include "order.hpp"
 
@@ -25,12 +26,12 @@ class Customer {
         /* Getters */
         int     getCsmrID(),
                 getTotalOrders();
-        std::string getCsmrName(),
-                    toStringCsmrID();
+        std::string getCsmrName();
 
         /* Methods */
         void    addOrder(Order *),
                 resetTotalOrders();
+        friend std::ostream &operator <<(std::ostream &, Customer &);
 };
 
 #endif

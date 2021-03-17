@@ -1,5 +1,3 @@
-
-
 #include <cctype>
 #include <fstream>
 
@@ -12,7 +10,7 @@ using namespace std;
 vector<string>  &loadInputFileData(const char *);
 void        runOrderProcessingSystem(vector<string> &);
 Customer   *processCustomer(string, vector<Customer *> &);
-void        processOrder(   string, vector<Customer *> &);
+Order      *processOrder(   string, vector<Customer *> &);
 
 int main(int argc, char **argv) {
 
@@ -130,7 +128,7 @@ Customer *processCustomer(string inputLine, vector<Customer *> &currentCustomers
 
             cerr << "Error: Duplicate customer found within input file... "
                  << "\nID: \t"
-                 << newCustomer->toStringCsmrID()
+                 << *newCustomer
                  << "\nName: \t"
                  << newCustomer->getCsmrName()
                  << endl;
@@ -140,7 +138,7 @@ Customer *processCustomer(string inputLine, vector<Customer *> &currentCustomers
 
     // Send Message to output stream
     cout << "OP: customer "
-         << newCustomer->toStringCsmrID()
+         << *newCustomer
          << " added"
          << endl;
 
@@ -148,25 +146,25 @@ Customer *processCustomer(string inputLine, vector<Customer *> &currentCustomers
 }
 
 /* Processes and validates a new order to be added from the input data */
-void processOrder(string inputLine, vector<Customer *> &currentCustomers) {
+Order *processOrder(string inputLine, vector<Customer *> &currentCustomers) {
 
     // TODO: CUSTOMER IS NULL
 
     int  odrDate    = stoi( inputLine.substr(1, 8) );
-    char orderType  = inputLine[9];
+    char type       = inputLine[9];
     int  csmrNum    = stoi( inputLine.substr(10, 4) );
     int  quantity   = stoi( inputLine.substr(14, 3) );
 
     Order *newOrder = NULL;
 
     // Validate order type
-    if ( orderType == 'N') {
+    if ( type == 'N') {
 
-        newOrder = new Order(odrDate, csmrNum, quantity);
+        newOrder = new Order(odrDate, csmrNum, quantity, type);
     }
-    else if ( orderType == 'X') {
+    else if ( type == 'X') {
 
-        newOrder = new Order(odrDate, csmrNum, quantity);
+        newOrder = new Order(odrDate, csmrNum, quantity, type);
         cout << "Create EXPR ORder" <<endl;
     }
     else {
@@ -175,7 +173,7 @@ void processOrder(string inputLine, vector<Customer *> &currentCustomers) {
              << "\n |Date: " 
              << odrDate
              << "\n |Order Type: "
-             << orderType
+             << type
              << "\n |Customer Number: "
              << csmrNum
              << "\n |Quantity: "
@@ -197,13 +195,9 @@ void processOrder(string inputLine, vector<Customer *> &currentCustomers) {
     }
     while (i < currentCustomers.size());
     
-    // OP: customer 0001:  normal order:  quantity 40
-        // << currentCustomers[i].toStringCsmrID()
-    cout << "OP: customer "
-         << ": "
-         << newOrder->toStringOrderType()
-         << " order: "
-         << "quantity "
-         << newOrder->getOrderQuantity()
+    cout << "OP: "
+         << *newOrder
          << endl;
+
+    return newOrder;
 }
