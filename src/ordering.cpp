@@ -1,8 +1,8 @@
 #include <cctype>
 #include <fstream>
 
-#include "order.cpp"
 #include "customer.cpp"
+#include "order.cpp"
 
 using namespace std;
 
@@ -11,6 +11,7 @@ vector<string>  &loadInputFileData(const char *);
 void        runOrderProcessingSystem(vector<string> &);
 Customer   *processCustomer(string, vector<Customer *> &);
 Order      *processOrder(   string, vector<Customer *> &);
+void        shipOrders(Customer *);
 
 int main(int argc, char **argv) {
 
@@ -60,6 +61,7 @@ vector<string> &loadInputFileData(const char *fileIn) {
 void runOrderProcessingSystem(vector<string> &inputData) {
 
     static vector<Customer *> customers;
+    Order *newOrder; 
 
     /* Iterate through each data entry stored in the vector */
     for (int i = 0; i < inputData.size(); i++) {
@@ -67,22 +69,24 @@ void runOrderProcessingSystem(vector<string> &inputData) {
         char firstChar = inputData[i][0];
         switch (firstChar) {
             
-            /* Customer */
+            // Add Customer
             case 'C':
 
                 customers.push_back( processCustomer(inputData[i], customers) );
                 break;
 
-            /* Order */
+            // Add Order
             case 'S':
-            
-                processOrder( inputData[i], customers );
-                /* Messages TODO~
-                    customer X:  order quantity is incremented by Y
-                 */
+
+                newOrder = processOrder(inputData[i], customers);
+                if ( newOrder->getOrderType() == "EXPRESS" ) {
+                    
+                    cout << "FLUSH ORDER" << endl;
+                }
+                
                 break;
 
-            /* End-Of-Day */
+            // Invoke End-Of-Day
             case 'E':
                 /* Messages TODO~
                     end of day 20200201:
@@ -109,7 +113,6 @@ void runOrderProcessingSystem(vector<string> &inputData) {
                     exit(EXIT_FAILURE);
                 }
         }
-        cout << firstChar << endl; // DEBUG
     }
 }
 
@@ -122,9 +125,9 @@ Customer *processCustomer(string inputLine, vector<Customer *> &currentCustomers
     Customer *newCustomer = new Customer(number, name);
 
     // Validate customer is not duplicate
-    for( int j = 0; j < currentCustomers.size(); j++ ) {
+    for( Customer *csmr : currentCustomers ) {
 
-        if ( number == currentCustomers[j]->getCsmrID() ) {
+        if ( number == csmr->getCsmrID() ) {
 
             cerr << "Error: Duplicate customer found within input file... "
                  << "\nID: \t"
@@ -148,24 +151,33 @@ Customer *processCustomer(string inputLine, vector<Customer *> &currentCustomers
 /* Processes and validates a new order to be added from the input data */
 Order *processOrder(string inputLine, vector<Customer *> &currentCustomers) {
 
-    // TODO: CUSTOMER IS NULL
 
     int  odrDate    = stoi( inputLine.substr(1, 8) );
     char type       = inputLine[9];
     int  csmrNum    = stoi( inputLine.substr(10, 4) );
     int  quantity   = stoi( inputLine.substr(14, 3) );
 
-    Order *newOrder = NULL;
+    Customer *customer  = NULL;
+    Order *newOrder     = NULL;
+
+    // Add order to customer orders
+    for (Customer *csmr : currentCustomers) {
+
+        if ( csmrNum == csmr->getCsmrID()) {
+
+            customer = csmr;
+            break;
+        }
+    }
 
     // Validate order type
     if ( type == 'N') {
 
-        newOrder = new Order(odrDate, csmrNum, quantity, type);
+        newOrder = new Order(customer, quantity, type);
     }
     else if ( type == 'X') {
-
-        newOrder = new Order(odrDate, csmrNum, quantity, type);
-        cout << "Create EXPR ORder" <<endl;
+        
+        newOrder = new Express(customer, quantity, type, odrDate);
     }
     else {
 
@@ -183,21 +195,17 @@ Order *processOrder(string inputLine, vector<Customer *> &currentCustomers) {
     }
 
     // Add order to customer orders
-    int i = 0;
-    do {
-
-        if ( newOrder->getCustomerNumber() == currentCustomers[i]->getCsmrID()) {
-
-            currentCustomers[i]->addOrder( newOrder );
-            break;
-        }
-        i++;
-    }
-    while (i < currentCustomers.size());
+    customer->addOrder( newOrder, newOrder->getOrderQuantity() );
     
+    // Send Message to output stream
     cout << "OP: "
          << *newOrder
          << endl;
 
     return newOrder;
+}
+
+void shipOrders( Customer *csmr ) {
+
+    
 }
