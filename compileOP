@@ -1,5 +1,5 @@
 #!/bin/sh
-## compile ##
+## compileOP ##
 clear                                                                   \
  && [[ -d bin ]] || mkdir bin                                           \
  && g++ -std=c++11 -I./src -c ./src/customer.cpp    -o ./bin/customer.o \

@@ -169,17 +169,30 @@ Order *processOrder(string inputLine, vector<Customer *> &currentCustomers) {
             break;
         }
     }
-        
+
+    // Validate order customer number 
+    if (customer == NULL) {
+
+        cerr << "Error: order customer number is for a customer the does not exist"
+             << "\n |Customer Number: "
+             << csmrNum
+             << endl;
+        exit(EXIT_FAILURE);
+    }
     // Validate order type
     if ( type != 'N' && type != 'X') {
 
-        cerr << "Error: order either; has no type defined ('N'/'X') or follows an incorrect format"
-             << "\n |Date: " 
-             << odrDate
+        cerr << "Error: order type must be normal or express ('N' or 'X')"
              << "\n |Order Type: "
              << type
-             << "\n |Customer Number: "
-             << csmrNum
+             << endl;
+        exit(EXIT_FAILURE);
+    }
+
+    // Validate order quantiy
+    if ( !quantity > 0) {
+
+        cerr << "Error: order quantity is either; zero or negative"
              << "\n |Quantity: "
              << quantity
              << endl;

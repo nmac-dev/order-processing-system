@@ -7,13 +7,17 @@ If a customer places an “express” order, then it and all its outstanding ord
 When a shipment is triggered for a customer, they are notified that a shipment is on its way, and an invoice is sent to them.  
 
 ## Valgrind CL Example
-`valgrind --leak-check=yes bin/./ordering testInputFile.txt`
 
 ## Task TODO List
 Each checkbox represents...
- * [ ] Code to be implemented
+ * [ ] To be implemented
  * [x] Implementation complete
+
 ___
+### Test For Memory Leaks (Valgrind)
+Command Line: `valgrind -s --leak-check=yes bin/./ordering testInputFile.txt`
+ * [x] All memory leaks resolved
+
 ### Handling the Input File
  * [x] read CL parameters (for the file name)
  * [x] process data for...
@@ -52,7 +56,8 @@ A message will be generated for each event...
  * [x] (customer message) customer receives an invoice
 
 ### Input File Regex (Records)
-Example Input File
+  
+#### Example Input File
 | Line   | Contents                             | 
 | --:    | :--                                  |
 | 1      | C0001Royal Devon & Exeter Hospital   |
@@ -94,7 +99,7 @@ Example Input File
 | --:    | :-:       | :--                                           |
 | 1      | char      | start with 'E'                                |
 | 2-9    | int       | date (YYYYMMDD); marks the end of the day     |
-
+  
 ___
 ## Deliverables
 ( C++11 )
