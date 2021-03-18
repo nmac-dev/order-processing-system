@@ -7,7 +7,7 @@ If a customer places an “express” order, then it and all its outstanding ord
 When a shipment is triggered for a customer, they are notified that a shipment is on its way, and an invoice is sent to them.  
   
 ## How To Run?
-(NOTE: `ordering` is complied for a linux machine )
+(NOTE: `ordering` is complied for a linux machine )  
 In a terminal...
  * Navigate to the `order-processing-system` directory
  * then use command: `bin/./ordering testInputFile.txt`
