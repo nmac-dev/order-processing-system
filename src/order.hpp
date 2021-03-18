@@ -28,7 +28,7 @@ class Order {
             getOrderDate();
         std::string getOrderType();
 
-        /* Operator overload */
+        /* Operator Overload */
         friend std::ostream &operator <<(std::ostream &, Order &);
 };
 

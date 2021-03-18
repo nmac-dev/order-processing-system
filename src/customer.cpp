@@ -1,6 +1,8 @@
 #include "customer.hpp"
 
-/* Customer (csmr) Class */
+/* 
+ * Customer (csmr) Class 
+ */
 inline Customer::Customer(int id, std::string name) {
     
         this->csmrID    = id;
@@ -8,7 +10,11 @@ inline Customer::Customer(int id, std::string name) {
         this->totalQuantity = 0;
         std::vector<Order *> orders;
 }
-inline Customer::~Customer(){}
+inline Customer::~Customer(){
+        
+        // Delete and Clear all orders before customer is deleted
+        
+}
 
 /* Getters */
 inline int             Customer::getCsmrID()        { return this->csmrID;        }
@@ -16,13 +22,12 @@ inline int             Customer::getTotalQuantity() { return this->totalQuantity
 inline std::string     Customer::getCsmrName()      { return this->csmrName;      }
 inline std::vector<Order *> &Customer::getOrders()  { return this->orders;       }
 
-/* Methods */
+/* Add the order to the customer and assign the quantity to the total */
 inline void Customer::addOrder(Order *odr, int quantity) { 
 
         this->orders.push_back(odr);
         this->totalQuantity += quantity;    
 }
-
 inline void Customer::resetTotalQuantity() { this->totalQuantity = 0; }
 
 /* Returns the padded customer id */

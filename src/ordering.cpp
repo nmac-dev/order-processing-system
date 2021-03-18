@@ -211,7 +211,8 @@ void finaliseOrders( Customer *csmr, int *invoiceNum, int date) {
         
         delete odr;
     }
-    csmr->getOrders().clear();
+    csmr->getOrders().erase( csmr->getOrders().begin(), csmr->getOrders().end() );
+    csmr->getOrders().shrink_to_fit();
     csmr->resetTotalQuantity();
 
     // Output Shipped Orders
