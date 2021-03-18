@@ -151,7 +151,6 @@ Customer *processCustomer(string inputLine, vector<Customer *> &currentCustomers
 /* Processes and validates a new order to be added from the input data */
 Order *processOrder(string inputLine, vector<Customer *> &currentCustomers) {
 
-
     int  odrDate    = stoi( inputLine.substr(1, 8) );
     char type       = inputLine[9];
     int  csmrNum    = stoi( inputLine.substr(10, 4) );
