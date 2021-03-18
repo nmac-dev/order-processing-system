@@ -6,6 +6,13 @@ At the end of each day the orders are collated and each customer’s total order
 If a customer places an “express” order, then it and all its outstanding orders for the day are sent immediately (bypasses end of day).  
 When a shipment is triggered for a customer, they are notified that a shipment is on its way, and an invoice is sent to them.  
   
+## How To Run?
+(NOTE: `ordering` is complied for a linux machine )
+In a terminal...
+ * Navigate to the `order-processing-system` directory
+ * then use command: `bin/./ordering testInputFile.txt`
+ * IF you have your own test file then replace `testInputFile.txt`
+  
 ## Task TODO List
 Each checkbox represents...
  * [ ] To be implemented
