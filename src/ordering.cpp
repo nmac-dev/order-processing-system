@@ -11,8 +11,8 @@ vector<string>  &loadInputFileData(const char *);
 void        runOrderProcessingSystem(vector<string> &);
 Customer   *processCustomer(string, vector<Customer *> &);
 Order      *processOrder(   string, vector<Customer *> &);
-void        finaliseOrders( Customer *, int, int);
-void        processEndOfDay(string, vector<Customer *> &, int);
+void        finaliseOrders( Customer *, int *, int);
+void        processEndOfDay(string, vector<Customer *> &, int *);
 
 int main(int argc, char **argv) {
 
@@ -65,7 +65,7 @@ void runOrderProcessingSystem(vector<string> &inputData) {
     Customer *currentCsmr;
     Order    *newOrder;
     int invoiceDate;
-    int invoiceNumber = 0;
+    static int invoiceNumber = 1000;
 
     /* Iterate through each data entry stored in the vector */
     for (int i = 0; i < inputData.size(); i++) {
@@ -89,15 +89,13 @@ void runOrderProcessingSystem(vector<string> &inputData) {
                     currentCsmr = newOrder->getCustomer();
                     invoiceDate = newOrder->getOrderDate();
 
-                    invoiceNumber++;
-                    finaliseOrders( currentCsmr, invoiceNumber, invoiceDate );
+                    finaliseOrders( currentCsmr, &invoiceNumber, invoiceDate );
                 }
                 break;
 
             // Invoke End-Of-Day
             case 'E':
-                invoiceNumber++;
-                processEndOfDay( inputData[i], customers, invoiceNumber);
+                processEndOfDay( inputData[i], customers, &invoiceNumber);
                 break;
 
             /* Error: file format incorrect */
@@ -204,7 +202,7 @@ Order *processOrder(string inputLine, vector<Customer *> &currentCustomers) {
 }
 
 /* Delete and Clear all orders for the customer, then output the shipped total and invoke an invoice */
-void finaliseOrders( Customer *csmr, int invoiceNum, int date) {
+void finaliseOrders( Customer *csmr, int *invoiceNum, int date) {
 
     int totalQuantity = csmr->getTotalQuantity();
 
@@ -227,18 +225,18 @@ void finaliseOrders( Customer *csmr, int invoiceNum, int date) {
     cout << "SC: customer "
          << *csmr
          << ": invoice "
-         << setfill('0') 
-         << std::setw(4) 
-         << invoiceNum
+         << *invoiceNum
          << ": date "
          << date
          << ": quantity: "
          << totalQuantity
          << endl;
+
+    (*invoiceNum)++;
 }
 
 /* Output notification for the end of the day, then ship orders and send an invoice ( only if orders are > 0 )*/
-void processEndOfDay(string inputLine, vector<Customer *> &customers, int invoiceNum) {
+void processEndOfDay(string inputLine, vector<Customer *> &customers, int *invoiceNum) {
 
     int invoiceDate = stoi( inputLine.substr(1, 8) );
     
