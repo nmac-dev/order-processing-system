@@ -11,7 +11,8 @@ vector<string>  &loadInputFileData(const char *);
 void        runOrderProcessingSystem(vector<string> &);
 Customer   *processCustomer(string, vector<Customer *> &);
 Order      *processOrder(   string, vector<Customer *> &);
-void        shipOrders(Customer *);
+int         shipOrders(Customer *);
+void        sendInvoice(Customer *, int, int);
 
 int main(int argc, char **argv) {
 
@@ -61,7 +62,8 @@ vector<string> &loadInputFileData(const char *fileIn) {
 void runOrderProcessingSystem(vector<string> &inputData) {
 
     static vector<Customer *> customers;
-    Order *newOrder; 
+    Customer *currentCsmr;
+    Order    *newOrder;
 
     /* Iterate through each data entry stored in the vector */
     for (int i = 0; i < inputData.size(); i++) {
@@ -79,11 +81,17 @@ void runOrderProcessingSystem(vector<string> &inputData) {
             case 'S':
 
                 newOrder = processOrder(inputData[i], customers);
+                // Ship an invoice if the order is an express
                 if ( newOrder->getOrderType() == "EXPRESS" ) {
                     
-                    cout << "FLUSH ORDER" << endl;
+                    currentCsmr = newOrder->getCustomer();
+                    
+                    sendInvoice( 
+                        currentCsmr,
+                        newOrder->getOrderDate(),
+                        shipOrders( currentCsmr )
+                    );
                 }
-                
                 break;
 
             // Invoke End-Of-Day
@@ -157,8 +165,8 @@ Order *processOrder(string inputLine, vector<Customer *> &currentCustomers) {
     int  csmrNum    = stoi( inputLine.substr(10, 4) );
     int  quantity   = stoi( inputLine.substr(14, 3) );
 
-    Customer *customer  = NULL;
-    Order *newOrder     = NULL;
+    Customer *customer = NULL;
+    Order    *newOrder = NULL;
 
     // Add order to customer orders
     for (Customer *csmr : currentCustomers) {
@@ -205,7 +213,46 @@ Order *processOrder(string inputLine, vector<Customer *> &currentCustomers) {
     return newOrder;
 }
 
-void shipOrders( Customer *csmr ) {
+/* Delete and Clear all orders for the customer, then output the shipped total */
+int shipOrders( Customer *csmr ) {
 
-    
+    int totalQuantity = csmr->getTotalQuantity();
+    Order *ptr = NULL;
+
+    // Delete all orders
+    for ( Order *odr : csmr->getOrders() ) {
+        ptr = odr;
+        cout << "Deleted: " << odr->getOrderQuantity() << endl;
+        delete odr;
+        cout << "Post Del: " << ptr->getOrderQuantity() << endl;
+    }
+    // Clear vector and reset customer total quantity
+    csmr->getOrders().clear();
+    csmr->resetTotalQuantity();
+
+    // OP: customer 0001: shipped quantity 240
+    cout << "OP: customer "
+         << *csmr
+         << ": shipped quantity "
+         << totalQuantity
+         << endl;
+
+    return totalQuantity;
+}
+
+void sendInvoice(Customer *customer, int date, int totalQuantity) {
+
+    static int invoiceNum = invoiceNum++;
+
+    // SC: customer 0002:  invoice 1002:  date 20200202:  quantity:  220
+    cout << "SC: customer "
+         << *customer
+         << ": invoice "
+         << invoiceNum
+         << ": date "
+         << date
+         << ": quantity: "
+         << totalQuantity
+         << endl;
+
 }

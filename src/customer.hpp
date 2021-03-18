@@ -5,17 +5,20 @@
 #include <iostream>
 #include <iomanip>
 
-#include "order.hpp"
+// Order class forward decleration
+class Order;
 
-/* Customer (csmr) Prototype */
+/* 
+ * Customer (csmr) Prototype 
+ */
 class Customer {
     
     private:
 
-        std::vector<Order *> orders;
         int     csmrID,
-                totalOrders;
+                totalQuantity;
         std::string  csmrName;
+        std::vector<Order *> orders;
 
     public:
 
@@ -25,12 +28,13 @@ class Customer {
 
         /* Getters */
         int     getCsmrID(),
-                getTotalOrders();
+                getTotalQuantity();
         std::string getCsmrName();
+        std::vector<Order *> &getOrders();
 
         /* Methods */
-        void    addOrder(Order *),
-                resetTotalOrders();
+        void    addOrder(Order *, int),
+                resetTotalQuantity();
         friend std::ostream &operator <<(std::ostream &, Customer &);
 };
 

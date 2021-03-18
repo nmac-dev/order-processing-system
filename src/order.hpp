@@ -2,30 +2,53 @@
 #define __ORDER_HPP
 
 #include <string>
+#include "customer.hpp"
 
-/* Customer (csmr) Prototype */
+/* 
+ *  Order (odr) Prototype 
+ */
 class Order {
     
     protected:
 
-        int  orderDate,
-             customerNumber,
-             orderQuantity;
+        Customer *customer;
+        int orderQuantity;
         char orderType;
 
     public:
 
         /* Constructor & Destructor */
-        Order(int, int, int, char);
+        Order(Customer *, int, char);
         ~Order();   
 
         /* Getters */
-        int     getOrderDate(),
-                getCustomerNumber(),
-                getOrderQuantity();
-        std::string getOrderType(),
-                    toStringOrderDetails(int);
+        Customer *getCustomer();
+        int getOrderQuantity(),
+            getOrderDate();
+        std::string getOrderType();
+
+        /* Operator overload */
         friend std::ostream &operator <<(std::ostream &, Order &);
+};
+
+/* 
+ *  Express Order (expr) Prototype 
+ */
+class Express : public Order {
+    
+    private:
+
+        int orderDate;
+
+    public:
+
+        /* Constructor & Destructor */
+        Express(Customer *, int, char, int);
+        ~Express();   
+
+        /* Getters */
+        int getOrderDate();
+
 };
 
 #endif

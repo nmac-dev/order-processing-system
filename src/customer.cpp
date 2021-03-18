@@ -3,27 +3,27 @@
 /* Customer (csmr) Class */
 inline Customer::Customer(int id, std::string name) {
     
-        
-        std::vector<Order> orders;
-        this->csmrID        = id;
-        this->csmrName      = name;
-        this->totalOrders   = 0;
+        this->csmrID    = id;
+        this->csmrName  = name;
+        this->totalQuantity = 0;
+        std::vector<Order *> orders;
 }
 inline Customer::~Customer(){}
 
 /* Getters */
-inline int             Customer::getCsmrID()       { return this->csmrID;        }
-inline int             Customer::getTotalOrders()  { return this->totalOrders;   }
-inline std::string     Customer::getCsmrName()     { return this->csmrName;      }
+inline int             Customer::getCsmrID()        { return this->csmrID;        }
+inline int             Customer::getTotalQuantity() { return this->totalQuantity; }
+inline std::string     Customer::getCsmrName()      { return this->csmrName;      }
+inline std::vector<Order *> &Customer::getOrders()  { return this->orders;       }
 
 /* Methods */
-inline void Customer::addOrder(Order *odr) { 
+inline void Customer::addOrder(Order *odr, int quantity) { 
 
         this->orders.push_back(odr);
-        this->totalOrders += odr->getOrderQuantity();    
+        this->totalQuantity += quantity;    
 }
 
-inline void Customer::resetTotalOrders() { this->totalOrders = 0; }
+inline void Customer::resetTotalQuantity() { this->totalQuantity = 0; }
 
 /* Returns the padded customer id */
 inline std::ostream &operator <<(std::ostream &stream, Customer &csmr) {
