@@ -28,6 +28,8 @@ inline void Customer::resetTotalQuantity() { this->totalQuantity = 0; }
 /* Returns the padded customer id */
 inline std::ostream &operator <<(std::ostream &stream, Customer &csmr) {
 
-        stream << std::setfill('0') << std::setw(4) << csmr.getCsmrID();
+        stream  << std::setfill('0') 
+                << std::setw(4) 
+                << csmr.getCsmrID();
         return stream;
 }

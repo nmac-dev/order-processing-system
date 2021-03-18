@@ -11,14 +11,15 @@ class Order {
     
     protected:
 
-        Customer *customer;
-        int orderQuantity;
         char orderType;
+        int orderDate,
+            orderQuantity;
+        Customer *customer;
 
     public:
 
         /* Constructor & Destructor */
-        Order(Customer *, int, char);
+        Order(int, char, Customer *, int);
         ~Order();   
 
         /* Getters */
@@ -29,26 +30,6 @@ class Order {
 
         /* Operator overload */
         friend std::ostream &operator <<(std::ostream &, Order &);
-};
-
-/* 
- *  Express Order (expr) Prototype 
- */
-class Express : public Order {
-    
-    private:
-
-        int orderDate;
-
-    public:
-
-        /* Constructor & Destructor */
-        Express(Customer *, int, char, int);
-        ~Express();   
-
-        /* Getters */
-        int getOrderDate();
-
 };
 
 #endif

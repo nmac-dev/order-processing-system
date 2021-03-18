@@ -3,17 +3,18 @@
 /* 
  *      Normal Order Class 
  */
-inline Order::Order(Customer *csmr, int quantity, char type) {
+inline Order::Order(int date, char type, Customer *csmr, int quantity) {
     
+        this->orderDate         = date;
+        this->orderType         = type;
         this->customer          = csmr;
         this->orderQuantity     = quantity;
-        this->orderType         = type;
 }
 inline Order::~Order(){}
 
 /* Getters */
 inline Customer *Order::getCustomer()      { return this->customer;      }
-inline int       Order::getOrderDate()     { return 0;                   }
+inline int       Order::getOrderDate()     { return this->orderDate;                   }
 inline int       Order::getOrderQuantity() { return this->orderQuantity; }
 
 inline std::string Order::getOrderType() { 
@@ -38,16 +39,3 @@ inline std::ostream &operator <<(std::ostream &stream, Order &odr) {
 
         return stream;
 }
-
-/* 
- *      Express Order Class 
- */
-inline Express::Express(Customer *csmr, int quantity, char type, int odrDate) : 
-                Order(csmr, quantity, type) {
-        
-        this->orderDate = odrDate;
-}
-inline Express::~Express(){}
-
-/* Getters */
-inline int Express::getOrderDate() { return this->orderDate; }

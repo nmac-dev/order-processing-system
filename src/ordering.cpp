@@ -64,6 +64,7 @@ void runOrderProcessingSystem(vector<string> &inputData) {
     static vector<Customer *> customers;
     Customer *currentCsmr;
     Order    *newOrder;
+    int      invoiceDate;
 
     /* Iterate through each data entry stored in the vector */
     for (int i = 0; i < inputData.size(); i++) {
@@ -85,10 +86,11 @@ void runOrderProcessingSystem(vector<string> &inputData) {
                 if ( newOrder->getOrderType() == "EXPRESS" ) {
                     
                     currentCsmr = newOrder->getCustomer();
-                    
+                    invoiceDate = newOrder->getOrderDate();
+
                     sendInvoice( 
                         currentCsmr,
-                        newOrder->getOrderDate(),
+                        invoiceDate,
                         shipOrders( currentCsmr )
                     );
                 }
@@ -177,17 +179,10 @@ Order *processOrder(string inputLine, vector<Customer *> &currentCustomers) {
             break;
         }
     }
+        
 
     // Validate order type
-    if ( type == 'N') {
-
-        newOrder = new Order(customer, quantity, type);
-    }
-    else if ( type == 'X') {
-        
-        newOrder = new Express(customer, quantity, type, odrDate);
-    }
-    else {
+    if ( type != 'N' && type != 'X') {
 
         cerr << "Error: order either; has no type defined ('N'/'X') or follows an incorrect format"
              << "\n |Date: " 
@@ -202,7 +197,7 @@ Order *processOrder(string inputLine, vector<Customer *> &currentCustomers) {
         exit(EXIT_FAILURE);
     }
 
-    // Add order to customer orders
+    newOrder = new Order(odrDate, type, customer, quantity);
     customer->addOrder( newOrder, newOrder->getOrderQuantity() );
     
     // Send Message to output stream
@@ -217,20 +212,15 @@ Order *processOrder(string inputLine, vector<Customer *> &currentCustomers) {
 int shipOrders( Customer *csmr ) {
 
     int totalQuantity = csmr->getTotalQuantity();
-    Order *ptr = NULL;
 
-    // Delete all orders
+    // Delete and Clear all orders
     for ( Order *odr : csmr->getOrders() ) {
-        ptr = odr;
-        cout << "Deleted: " << odr->getOrderQuantity() << endl;
+        
         delete odr;
-        cout << "Post Del: " << ptr->getOrderQuantity() << endl;
     }
-    // Clear vector and reset customer total quantity
     csmr->getOrders().clear();
     csmr->resetTotalQuantity();
 
-    // OP: customer 0001: shipped quantity 240
     cout << "OP: customer "
          << *csmr
          << ": shipped quantity "
@@ -240,19 +230,20 @@ int shipOrders( Customer *csmr ) {
     return totalQuantity;
 }
 
+/* Output the invoice details */
 void sendInvoice(Customer *customer, int date, int totalQuantity) {
 
-    static int invoiceNum = invoiceNum++;
+    static int invoiceNum = (invoiceNum > 0) ? invoiceNum++ : 1;
 
-    // SC: customer 0002:  invoice 1002:  date 20200202:  quantity:  220
     cout << "SC: customer "
          << *customer
          << ": invoice "
+         << setfill('0') 
+         << std::setw(4) 
          << invoiceNum
          << ": date "
          << date
          << ": quantity: "
          << totalQuantity
          << endl;
-
 }
