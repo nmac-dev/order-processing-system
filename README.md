@@ -5,9 +5,7 @@ Customer's place multiple orders during each day.
 At the end of each day the orders are collated and each customer’s total order quantity is sent to them as a single shipment.  
 If a customer places an “express” order, then it and all its outstanding orders for the day are sent immediately (bypasses end of day).  
 When a shipment is triggered for a customer, they are notified that a shipment is on its way, and an invoice is sent to them.  
-
-## Valgrind CL Example
-
+  
 ## Task TODO List
 Each checkbox represents...
  * [ ] To be implemented
