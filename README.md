@@ -10,7 +10,8 @@ When a shipment is triggered for a customer, they are notified that a shipment i
 (NOTE: `ordering` is complied for a linux machine )  
 In a terminal...
  * Navigate to the `order-processing-system` directory
- * then use command: `bin/./ordering testInputFile.txt`
+ * compile the program with command: `./compileOP`
+ * then then run the program with command: `bin/./ordering testInputFile.txt`
  * IF you have your own test file then replace `testInputFile.txt`
   
 ## Task TODO List
