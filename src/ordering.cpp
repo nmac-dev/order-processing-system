@@ -1,18 +1,6 @@
-#include <cctype>
-#include <fstream>
-
-#include "customer.cpp"
-#include "order.cpp"
+#include "ordering.hpp"
 
 using namespace std;
-
-/* Prototypes */
-vector<string>  &loadInputFileData(const char *);
-void        runOrderProcessingSystem(vector<string> &);
-Customer   *processCustomer(string, vector<Customer *> &);
-Order      *processOrder(   string, vector<Customer *> &);
-void        finaliseOrders( Customer *, int *, int);
-void        processEndOfDay(string, vector<Customer *> &, int *);
 
 int main(int argc, char **argv) {
 
@@ -118,6 +106,14 @@ void runOrderProcessingSystem(vector<string> &inputData) {
                 }
         }
     }
+
+    // Delete and Clear all Customers
+    for ( Customer *csmr : customers ) {
+        
+        delete csmr;
+    }
+    customers.erase( customers.begin(), customers.end() );
+    customers.shrink_to_fit();
 }
 
 /* Processes and validates a new customer to be added from the input data */

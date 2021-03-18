@@ -10,17 +10,13 @@ inline Customer::Customer(int id, std::string name) {
         this->totalQuantity = 0;
         std::vector<Order *> orders;
 }
-inline Customer::~Customer(){
-        
-        // Delete and Clear all orders before customer is deleted
-        
-}
+inline Customer::~Customer(){}
 
 /* Getters */
 inline int             Customer::getCsmrID()        { return this->csmrID;        }
 inline int             Customer::getTotalQuantity() { return this->totalQuantity; }
 inline std::string     Customer::getCsmrName()      { return this->csmrName;      }
-inline std::vector<Order *> &Customer::getOrders()  { return this->orders;       }
+inline std::vector<Order *> &Customer::getOrders()  { return this->orders;        }
 
 /* Add the order to the customer and assign the quantity to the total */
 inline void Customer::addOrder(Order *odr, int quantity) { 
