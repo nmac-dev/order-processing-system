@@ -11,7 +11,7 @@ When a shipment is triggered for a customer, they are notified that a shipment i
 In a terminal...
  * Navigate to the `order-processing-system` directory
  * compile the program with command: `./compileOP`
- * then then run the program with command: `bin/./ordering testInputFile.txt`
+ * then run the program with command: `bin/./ordering testInputFile.txt`
  * IF you have your own test file then replace `testInputFile.txt`
   
 ## Task TODO List
