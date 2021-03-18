@@ -111,7 +111,7 @@ ___
 ( C++11 )
  * [x] Linux Shell compile script called "compileOP"
  * [x] compiled executable must be called "ordering"
- * [ ] Report
+ * [x] Report
 
  ## Report
  - 3 pages (Max)
