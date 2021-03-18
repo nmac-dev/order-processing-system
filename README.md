@@ -6,6 +6,8 @@ At the end of each day the orders are collated and each customer’s total order
 If a customer places an “express” order, then it and all its outstanding orders for the day are sent immediately (bypasses end of day).  
 When a shipment is triggered for a customer, they are notified that a shipment is on its way, and an invoice is sent to them.  
 
+## Valgrind CL Example
+`valgrind --leak-check=yes bin/./ordering testInputFile.txt`
 
 ## Task TODO List
 Each checkbox represents...
@@ -14,7 +16,7 @@ Each checkbox represents...
 ___
 ### Handling the Input File
  * [x] read CL parameters (for the file name)
- * [ ] process data for...
+ * [x] process data for...
    - new customers
    - sales orders
    - end-of-day
@@ -26,11 +28,11 @@ Add a new...
  * [x] customer (with unique id)
  * [x] "normal" order :
    - quantity is added to the customer's order total
- * [ ] express order :
+ * [x] express order :
    - quantity is added to the customer's order total,
    - then; total quantity is shipped to the customer,
    - finally; the customer's order quantity is then reset to 0.
- * [ ] End-of-day processing :
+ * [x] End-of-day processing :
    - ( only for customers who have orders > 0 )
    - total quantity is shipped to the customer,
    - then; the customer's order quantity is then reset to 0.
@@ -38,16 +40,16 @@ Add a new...
 ### Handling Output
 Messages are sent to the output stream.  
 The following prefix delcares the messages were generated from...
- * [ ] OP: the order processing system
- * [ ] SC: a customer
+ * [x] OP: the order processing system
+ * [x] SC: a customer
 
 A message will be generated for each event...
- * [ ] new customer is added
- * [ ] new normal order is processed
- * [ ] new express order is processed
- * [ ] shipment is sent to a customer
- * [ ] end of a day has been reached
- * [ ] (customer message) customer receives an invoice
+ * [x] new customer is added
+ * [x] new normal order is processed
+ * [x] new express order is processed
+ * [x] shipment is sent to a customer
+ * [x] end of a day has been reached
+ * [x] (customer message) customer receives an invoice
 
 ### Input File Regex (Records)
 Example Input File
