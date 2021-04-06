@@ -8,13 +8,13 @@ A customer order processing system to showcase C++ programming skills as a Summa
  - [Design](#Design)
    - [Assumptions](#Assumptions)
    - [Classes](#Classes)
- - [Input File Regex (Records)](#Input-File-Regex-(Records))
+ - [Input File Records](#Input-File-Records)
    - [New Customer](#New-Customer)
    - [Sales Order](#Sales-Order)
    - [End-of-day](#End-of-day)
      - [Example](#Example)
  - [Task TODO List](#Task-TODO-List)
-   - [Test For Memory Leaks (Valgrind)](#Test-For-Memory-Leaks-(Valgrind))
+   - [Test For Memory Leaks Using Valgrind](#Test-For-Memory-Leaks-Using-Valgrind)
    - [Handling the Input File](#Handling-the-Input-File)
    - [Using the Input Data](#Using-the-Input-Data)
    - [Handling Output](#Handling-Output)
@@ -72,7 +72,7 @@ To better demonstrate the design see the UML diagram...
   
 <img alt="Class UML Diagram" src="README/uml-1.jpg">
   
-## Input File Regex (Records)
+## Input File Records
 Here are the details for each type of record.  
   
 ### New Customer
@@ -146,7 +146,7 @@ Each checkbox represents...
  * [ ] To be implemented
  * [x] Implementation complete
   
-### Test For Memory Leaks (Valgrind)
+### Test For Memory Leaks Using Valgrind
 Command Line: `valgrind -s --leak-check=yes bin/./ordering testInputFile.txt`
  * [x] All memory leaks resolved
   
