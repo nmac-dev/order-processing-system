@@ -100,26 +100,24 @@ Here are the details for each type of record.
 | 17   | E20210203                            |
   
 **Resulting Output Stream**
-| Line   | Contents                             | 
-| --:    | :--                                  |
-| 1      | OP: customer 0001 added                                            |
-| 2      | OP: customer 0002 added                                            |
-| 3      | OP: customer 0003 added                                            |
-| 4      | OP: customer 0001:  normal order:  quantity 40                     |
-| 5      | OP: customer 0001:  normal order:  quantity 50                     |
-| 6      | OP: end of day 20200201  
-           OP: customer 0001:  shipped quantity 90  
-           SC: customer 0001:  invoice 1000:  date 20200201:  quantity:  90   |
-| 7      | OP: customer 0001:  normal order:  quantity 40                     |
-| 8      | OP: customer 0001:  normal order:  quantity 60                     |
-| 9      | OP: customer 0002:  normal order:  quantity 50                     |
-| 10     | OP: customer 0002:  normal order:  quantity 170                    |
+| Line   | Contents                                         | 
+| --:    | :--                                              |
+| 1      | OP: customer 0001 added                          |
+| 2      | OP: customer 0002 added                          |
+| 3      | OP: customer 0003 added                          |
+| 4      | OP: customer 0001:  normal order:  quantity 40   |
+| 5      | OP: customer 0001:  normal order:  quantity 50   |
+| 6      | OP: end of day 20200201 <br> OP: customer 0001:  shipped quantity 90 <br> SC: customer 0001:  invoice 1000:  date 20200201:  quantity:  90   |
+| 7      | OP: customer 0001:  normal order:  quantity 40   |
+| 8      | OP: customer 0001:  normal order:  quantity 60   |
+| 9      | OP: customer 0002:  normal order:  quantity 50   |
+| 10     | OP: customer 0002:  normal order:  quantity 170  |
 | 11     | OP: end of day 20200202 <br> OP: customer 0001:  shipped quantity 100 <br> SC: customer 0001:  invoice 1001:  date 20200202:  quantity:  100 <br> OP: customer 0002:  shipped quantity 220 <br> SC: customer 0002:  invoice 1002:  date 20200202:  quantity:  220  |
-| 12     | OP: customer 0001:  normal order:  quantity 50                     |
-| 13     | OP: customer 0002:  normal order:  quantity 65                     |
-| 14     | OP: customer 0003:  normal order:  quantity 150                    |
+| 12     | OP: customer 0001:  normal order:  quantity 50   |
+| 13     | OP: customer 0002:  normal order:  quantity 65   |
+| 14     | OP: customer 0003:  normal order:  quantity 150  |
 | 15     | OP: customer 0001:  EXPRESS order:  quantity 190 <br> OP: customer 0001:  shipped quantity 240 <br> SC: customer 0001:  invoice 1003:  date 20200203:  quantity:  240  |
-| 16     | OP: customer 0002:  normal order:  quantity 110                    |
+| 16     | OP: customer 0002:  normal order:  quantity 110  |
 | 17     | OP: end of day 20200203 <br> OP: customer 0002:  shipped quantity 175 <br> SC: customer 0002:  invoice 1004:  date 20200203:  quantity:  175 <br> OP: customer 0003:  shipped quantity 150 <br> SC: customer 0003:  invoice 1005:  date 20200203:  quantity:  150  |
   
 ## Task TODO List
