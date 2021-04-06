@@ -1,10 +1,23 @@
 # order-processing-system  
 A customer order processing system to showcase C++ programming skills as a Summative Assessment.
-## Scenario  
-Customer's place multiple orders during each day. (represented by an input file)  
-At the end of each day the orders are collated and each customer’s total order quantity is sent to them as a single shipment.  
-If a customer places an “express” order, then it and all its outstanding orders for the day are sent immediately (bypasses end of day).  
-When a shipment is triggered for a customer, they are notified that a shipment is on its way, and an invoice is sent to them.  
+  
+## Content
+ - [How To Run?](#How-To-Run?)
+   - [Requirements](#Requirements)
+ - [Scenario](#Scenario)
+ - [Design](#Design)
+   - [Assumptions](#Assumptions)
+   - [Classes](#Classes)
+ - [Input File Regex (Records)](#Input-File-Regex-(Records))
+   - [New Customer](#New-Customer)
+   - [Sales Order](#Sales-Order)
+   - [End-of-day](#End-of-day)
+     - [Example](#Example)
+ - [Task TODO List](#Task-TODO-List)
+   - [Test For Memory Leaks (Valgrind)](#Test-For-Memory-Leaks-(Valgrind))
+   - [Handling the Input File](#Handling-the-Input-File)
+   - [Using the Input Data](#Using-the-Input-Data)
+   - [Handling Output](#Handling-Output)
   
 ## How To Run?
 In a terminal...
@@ -19,6 +32,13 @@ In a terminal...
  * C++11
  * g++ (compiler)
   
+## Scenario  
+Customer's place multiple orders during each day. (represented by an input file)  
+At the end of each day the orders are collated and each customer’s total order quantity is sent to them as a single shipment.  
+If a customer places an “express” order, then it and all its outstanding orders for the day are sent immediately (bypasses end of day).  
+When a shipment is triggered for a customer, they are notified that a shipment is on its way, and an invoice is sent to them.  
+  
+
 ## Design
 Outline of the assumptions and class design.
   
@@ -35,6 +55,7 @@ Outline of the assumptions and class design.
 | 8 | All order quantities will be greater than zero.                                                         |
   
 ### Classes
+There are two classes used in the program.
   
 **Customer Class ( customer.hpp, customer.cpp )**  
 Customer has been designed to hold a pointer for every new order created. Upon a customer being shipped their orders the pointers are used to iterate through and delete every order associated with the customer.  
@@ -76,7 +97,7 @@ Here are the details for each type of record.
 | 1      | char      | start with 'E'                                |
 | 2-9    | int       | date (YYYYMMDD); marks the end of the day     |
   
-### Example
+#### Example
   
 **Input File**
 | Line | Contents                             | 
