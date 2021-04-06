@@ -8,6 +8,7 @@ A customer order processing system to showcase C++ programming skills as a Summa
  - [Design](#Design)
    - [Assumptions](#Assumptions)
    - [Classes](#Classes)
+     - [UML Diagram](#UML-Diagram) 
  - [Input File Records](#Input-File-Records)
    - [New Customer](#New-Customer)
    - [Sales Order](#Sales-Order)
@@ -31,13 +32,13 @@ In a terminal...
 ### Requirements
  * C++11
  * g++ (compiler)
+ * valgrind (optional... see [Test For Memory Leaks](#Test-For-Memory-Leaks-Using-Valgrind) section)
   
 ## Scenario  
 Customer's place multiple orders during each day. (represented by an input file)  
 At the end of each day the orders are collated and each customer’s total order quantity is sent to them as a single shipment.  
 If a customer places an “express” order, then it and all its outstanding orders for the day are sent immediately (bypasses end of day).  
 When a shipment is triggered for a customer, they are notified that a shipment is on its way, and an invoice is sent to them.  
-  
 
 ## Design
 Outline of the assumptions and class design.
@@ -68,7 +69,9 @@ With all associated orders for a single given customer being held in a collectio
 **Order Class ( order.hpp, order.cpp )**  
 Order stores all data from the input line as variables except the customer number. Instead the customer number is replaced with a pointer to the actual customer instance, since [Assumptions](#Assumptions) states “orders have a customer number for an already existing customer” and thus it makes more sense to have a pointer.  
 Additionally by having an order point to its associated customer instance, all computations involving retrieving the order’s customer details are removed as we have a direct reference to said customer.  
-To better demonstrate the design see the UML diagram...  
+  
+#### UML Diagram
+To better demonstrate the design here is a UML diagram...  
   
 <img alt="Class UML Diagram" src="README/uml-1.jpg">
   
