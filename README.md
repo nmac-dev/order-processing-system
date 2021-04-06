@@ -1,5 +1,5 @@
 # order-processing-system  
-A customer order processing system as a C++ Summative Assessment.  
+A customer order processing system to showcase C++ programming skills as a Summative Assessment.
 ## Scenario  
 Customer's place multiple orders during each day. (represented by an input file)  
 At the end of each day the orders are collated and each customer’s total order quantity is sent to them as a single shipment.  
