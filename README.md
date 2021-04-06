@@ -1,5 +1,5 @@
 # order-management-system  
-A C++ Summative Assessment   
+A university C++ Summative Assessment  
 ## Scenario  
 Customer's place multiple orders during each day. (represented by an input file)  
 At the end of each day the orders are collated and each customer’s total order quantity is sent to them as a single shipment.  
@@ -51,17 +51,17 @@ To better demonstrate the design see the UML diagram...
   
 <img alt="Class UML Diagram" src="README/uml-1.jpg">
   
-### Input File Regex (Records)
+## Input File Regex (Records)
 Here are the details for each type of record.  
   
-#### New Customer
+### New Customer
 | Column | Datatype  | Description                                   |
 | --:    | :-:       | :--                                           |
 | 1      | char      | start with 'C'                                |
 | 2-5    | int       | customer number; a four digit, zero-padded    |
 | 6-45   | string    | customer’s name                               |
   
-#### Sales Order
+### Sales Order
 | Column | Datatype  | Description                                   |
 | --:    | :-:       | :--                                           |
 | 1      | char      | start with 'S'                                |
@@ -70,7 +70,7 @@ Here are the details for each type of record.
 | 11-14  | int       | customer number (customer raising the order)  |
 | 15-17  | int       | order quantity; three-digits, zero-padded     |
   
-#### End-of-day
+### End-of-day
 | Column | Datatype  | Description                                   |
 | --:    | :-:       | :--                                           |
 | 1      | char      | start with 'E'                                |
@@ -114,25 +114,13 @@ Here are the details for each type of record.
 | 8      | OP: customer 0001:  normal order:  quantity 60                     |
 | 9      | OP: customer 0002:  normal order:  quantity 50                     |
 | 10     | OP: customer 0002:  normal order:  quantity 170                    |
-| 11     | OP: end of day 20200202  
-           OP: customer 0001:  shipped quantity 100  
-           SC: customer 0001:  invoice 1001:  date 20200202:  quantity:  100  
-           OP: customer 0002:  shipped quantity 220  
-           SC: customer 0002:  invoice 1002:  date 20200202:  quantity:  220  |
+| 11     | OP: end of day 20200202 <br> OP: customer 0001:  shipped quantity 100 <br> SC: customer 0001:  invoice 1001:  date 20200202:  quantity:  100 <br> OP: customer 0002:  shipped quantity 220 <br> SC: customer 0002:  invoice 1002:  date 20200202:  quantity:  220  |
 | 12     | OP: customer 0001:  normal order:  quantity 50                     |
 | 13     | OP: customer 0002:  normal order:  quantity 65                     |
 | 14     | OP: customer 0003:  normal order:  quantity 150                    |
-| 15     | OP: customer 0001:  EXPRESS order:  quantity 190  
-           OP: customer 0001:  shipped quantity 240  
-           SC: customer 0001:  invoice 1003:  date 20200203:  quantity:  240  |
+| 15     | OP: customer 0001:  EXPRESS order:  quantity 190 <br> OP: customer 0001:  shipped quantity 240 <br> SC: customer 0001:  invoice 1003:  date 20200203:  quantity:  240  |
 | 16     | OP: customer 0002:  normal order:  quantity 110                    |
-| 17     | OP: end of day 20200203  
-           OP: customer 0002:  shipped quantity 175  
-           SC: customer 0002:  invoice 1004:  date 20200203:  quantity:  175  
-           OP: customer 0003:  shipped quantity 150  
-           SC: customer 0003:  invoice 1005:  date 20200203:  quantity:  150  |
-  
-___  
+| 17     | OP: end of day 20200203 <br> OP: customer 0002:  shipped quantity 175 <br> SC: customer 0002:  invoice 1004:  date 20200203:  quantity:  175 <br> OP: customer 0003:  shipped quantity 150 <br> SC: customer 0003:  invoice 1005:  date 20200203:  quantity:  150  |
   
 ## Task TODO List
 Each checkbox represents...
